@@ -16,3 +16,4 @@ public/apple-touch-icon.png
 data/media.json
 data/stats.json
 .lighthouse/
+public/favicon.svg
