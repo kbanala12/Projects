@@ -20,7 +20,7 @@
   --seq-3: #ff5c1c;
   --seq-4: #ffb46b;
   --seq-5: #fff0d0;
-  --font-display: 'Fraunces Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-display: 'Space Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Inter Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --gutter: clamp(16px, 4vw, 48px);

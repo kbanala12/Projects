@@ -32,7 +32,7 @@ path. `node scripts/serve.mjs` serves that build at
 
 ```bash
 npm run build
-npm run check        # headless Chromium: console errors, failed requests, broken links, images, filters, 360px overflow
+npm run check        # headless Chromium: console errors, failed requests, broken links, images, footnotes, 360px overflow
 npm run lighthouse   # Lighthouse mobile and desktop for the home and a project page, reports in .lighthouse/
 ```
 
@@ -70,7 +70,7 @@ site/
   data/projects.json      single source of truth
   scripts/                generate, check, lighthouse, serve
   src/templates/          HTML templates (JS template literals)
-  src/lib/                hero flow field, gallery filters, numbers, embeds
+  src/lib/                hero flow field, numbers, embeds
   src/styles/             tokens, base, components
   public/                 static assets (generated ones are git-ignored)
 ```
@@ -79,6 +79,6 @@ site/
 
 Dark instrument palette with one accent (`#ff5c1c`) and a six-stop
 sequential ramp shared by the build-time charts and the UI tokens. Type is
-Fraunces (display), Inter (body) and JetBrains Mono (data labels), all
+Space Grotesk (display), Inter (body) and JetBrains Mono (data labels), all
 self-hosted. The hero flow field reacts to the cursor and scroll, pauses when
 off screen, and draws a single static frame under `prefers-reduced-motion`.

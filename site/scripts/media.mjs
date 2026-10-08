@@ -112,8 +112,8 @@ async function renderBrandAssets() {
   <rect width="1200" height="630" fill="#0a0b0f"/>
   <g stroke="#1f2330" stroke-width="1">${Array.from({ length: 12 }, (_, i) => `<line x1="0" y1="${i * 60}" x2="1200" y2="${i * 60}"/>`).join('')}${Array.from({ length: 21 }, (_, i) => `<line x1="${i * 60}" y1="0" x2="${i * 60}" y2="630"/>`).join('')}</g>
   <text x="80" y="140" font-family="Menlo, monospace" font-size="22" fill="#ff5c1c" letter-spacing="4">DATA SCIENCE PORTFOLIO</text>
-  <text x="80" y="250" font-family="Georgia, serif" font-size="88" fill="#ecebe4">${escapeXml(site.title)}</text>
-  <text x="80" y="330" font-family="Georgia, serif" font-size="40" fill="#a7a9b3" font-style="italic">Questions, asked of data.</text>
+  <text x="80" y="250" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="600" font-size="84" letter-spacing="-3" fill="#ecebe4">${escapeXml(site.title)}</text>
+  <text x="80" y="330" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="38" fill="#a7a9b3">Questions, asked of data.</text>
   <text x="80" y="520" font-family="Menlo, monospace" font-size="22" fill="#a7a9b3">${n} projects  /  ${domains} domains  /  Python, R, Power BI</text>
   ${bars}
   <rect x="80" y="560" width="1040" height="2" fill="#ff5c1c"/>

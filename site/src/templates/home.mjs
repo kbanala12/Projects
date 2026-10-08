@@ -1,4 +1,4 @@
-import { esc, attr, chips, pad } from './util.mjs';
+import { esc, attr, pad } from './util.mjs';
 
 export function home({ base, db, charts, stats }) {
   const { site, projects } = db;
@@ -8,6 +8,9 @@ export function home({ base, db, charts, stats }) {
   const languages = new Set(projects.flatMap((p) => p.languages));
   const years = projects.map((p) => p.year);
 
+  const toolIndex = new Map(tools.map(([t], i) => [t, i + 1]));
+  const toolChips = (list) =>
+    list.map((t) => `<span class="chip">${esc(t)}<sup><a href="#tool-${toolIndex.get(t)}" aria-label="Footnote ${toolIndex.get(t)}, ${attr(t)}">${toolIndex.get(t)}</a></sup></span>`).join('');
   const cards = projects
     .map((p, i) => {
       const svg = charts[p.slug] || '';
@@ -20,22 +23,10 @@ export function home({ base, db, charts, stats }) {
       <p class="card__pitch">${esc(p.pitch)}</p>
     </div>
   </a>
-  <div class="card__chips">${chips(p.tools.slice(0, 4))}${p.tools.length > 4 ? `<span class="chip chip--more">+${p.tools.length - 4}</span>` : ''}</div>
+  <div class="card__chips">${toolChips(p.tools)}</div>
 </li>`;
     })
     .join('\n');
-
-  const filterGroup = (name, label, entries) => `
-<fieldset class="filters__group">
-  <legend class="mono">${label}</legend>
-  <div class="filters__chips">
-    ${entries
-      .map(
-        ([v, n]) => `<button type="button" class="fchip" data-filter="${name}" data-value="${attr(v)}" aria-pressed="false">${esc(v)}<span class="fchip__n">${n}</span></button>`
-      )
-      .join('')}
-  </div>
-</fieldset>`;
 
   const body = `
 <section class="hero" id="top">
@@ -63,26 +54,24 @@ export function home({ base, db, charts, stats }) {
     <header class="section__head reveal">
       <p class="eyebrow">Selected work</p>
       <h2 id="work-title" class="section__title">Six studies in public data</h2>
-      <p class="section__lede">Each card is a chart computed from the project's own dataset at build time. Open a project for the question, the method, the finding and the original figures.</p>
+      <p class="section__lede">Each card is a chart computed from the project's own dataset at build time. Open a project for the question, the method, the finding and the original figures. Numbered tools point to the stack notes below.</p>
     </header>
-    <form class="filters reveal" id="filters" role="search" aria-label="Filter projects" onsubmit="return false">
-      <div class="filters__search">
-        <label for="q" class="visually-hidden">Search projects</label>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" name="q" placeholder="Search title, tool, tag" autocomplete="off">
-      </div>
-      ${filterGroup('domain', 'Domain', domains)}
-      ${filterGroup('tool', 'Tool', tools)}
-      ${filterGroup('tag', 'Tag', tags)}
-      <div class="filters__foot">
-        <p class="mono" id="results" aria-live="polite">Showing ${projects.length} of ${projects.length}</p>
-        <button type="button" class="btn btn--ghost" id="clear" hidden>Clear filters</button>
-      </div>
-    </form>
     <ul class="grid" id="grid" aria-label="Projects">
 ${cards}
     </ul>
-    <p class="grid__empty mono" id="empty" hidden>No projects match. Try fewer filters.</p>
+    <aside class="footnotes reveal" aria-labelledby="fn-title">
+      <h3 id="fn-title" class="footnotes__h">Tech stack notes</h3>
+      <ol>
+${tools
+  .map(
+    ([t, n], i) => `        <li id="tool-${i + 1}"><span class="fn__n">${pad(i + 1)}</span><span class="fn__tool">${esc(t)}</span><span class="fn__uses">${n === 1 ? 'Used in' : `Used in ${n} projects:`} ${projects
+      .filter((p) => p.tools.includes(t))
+      .map((p) => `<a href="${base}projects/${p.slug}/">${esc(p.shortTitle)}</a>`)
+      .join(', ')}</span></li>`
+  )
+  .join('\n')}
+      </ol>
+    </aside>
   </div>
 </section>
 

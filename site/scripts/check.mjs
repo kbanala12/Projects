@@ -41,23 +41,10 @@ for (const rel of pages) {
   }
   if (rel === '') {
     const total = await page.$$eval('.card', (c) => c.length);
-    await page.click('.fchip[data-filter="tool"][data-value="Python"]');
-    await page.waitForTimeout(500);
-    const shown = await page.$$eval('.card:not([hidden])', (c) => c.length);
-    if (shown >= total || shown === 0) problems.push(`gallery filter Python gave ${shown} of ${total}`);
-    await page.click('#clear');
-    await page.fill('#q', 'medicare');
-    await page.waitForTimeout(400);
-    const s2 = await page.$$eval('.card:not([hidden])', (c) => c.length);
-    if (s2 !== 1) problems.push(`gallery search "medicare" gave ${s2} cards`);
-    await page.fill('#q', 'zzzz');
-    await page.waitForTimeout(400);
-    const emptyShown = await page.$eval('#empty', (e) => !e.hidden);
-    if (!emptyShown) problems.push('empty state did not show');
-    await page.click('#clear');
-    await page.waitForTimeout(300);
-    const restored = await page.$$eval('.card:not([hidden])', (c) => c.length);
-    if (restored !== total) problems.push(`clear restored ${restored} of ${total}`);
+    const notes = await page.$$eval('.footnotes li', (c) => c.length);
+    if (total !== 6 || notes === 0) problems.push(`home has ${total} cards and ${notes} stack notes`);
+    const danglers = await page.$$eval('.card sup a', (as) => as.filter((a) => !document.querySelector(a.getAttribute('href'))).length);
+    if (danglers) problems.push(`${danglers} footnote links point nowhere`);
     await page.screenshot({ path: '.cache/shot-home.png', fullPage: true });
   } else if (rel.startsWith('projects/')) {
     await page.screenshot({ path: `.cache/shot-${rel.split('/')[1]}.png`, fullPage: true });
