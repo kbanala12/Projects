@@ -5,20 +5,20 @@
     "tagline": "Statistical analysis, machine learning, and dashboards built on public health, energy, and behavioral data.",
     "description": "A showcase of data science and statistical analysis projects: hospital readmission prediction, Medicare payment analysis, New Jersey load forecasting, Self-Determination Theory, and more.",
     "repo": {
-      "owner": "kshitijabanala",
+      "owner": "kbanala12",
       "name": "Projects",
-      "url": "https://github.com/kshitijabanala/Projects",
+      "url": "https://github.com/kbanala12/Projects",
       "branch": "main"
     },
     "basePath": "/Projects/",
-    "siteUrl": "https://kshitijabanala.github.io/Projects/",
+    "siteUrl": "https://kbanala12.github.io/Projects/",
     "owner": {
       "name": "Kshitija Banala",
       "role": "PLACEHOLDER: your title, e.g. Data Scientist",
       "location": "PLACEHOLDER: city, region",
       "bio": "PLACEHOLDER: two or three sentences about who you are, what you work on, and what you are looking for.",
       "email": "PLACEHOLDER@example.com",
-      "github": "https://github.com/kshitijabanala",
+      "github": "https://github.com/kbanala12",
       "linkedin": "PLACEHOLDER: https://www.linkedin.com/in/your-handle",
       "resume": "",
       "_note": "Every PLACEHOLDER value above is an inference or a blank for you to fill in. The name comes from the repo owner and git author."
