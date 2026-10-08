@@ -1,0 +1,646 @@
+{
+  "site": {
+    "title": "Kshitija Banala",
+    "name": "Data Science Projects",
+    "tagline": "Statistical analysis, machine learning, and dashboards built on public health, energy, and behavioral data.",
+    "description": "A showcase of data science and statistical analysis projects: hospital readmission prediction, Medicare payment analysis, New Jersey load forecasting, Self-Determination Theory, and more.",
+    "repo": {
+      "owner": "kshitijabanala",
+      "name": "Projects",
+      "url": "https://github.com/kshitijabanala/Projects",
+      "branch": "main"
+    },
+    "basePath": "/Projects/",
+    "siteUrl": "https://kshitijabanala.github.io/Projects/",
+    "owner": {
+      "name": "Kshitija Banala",
+      "role": "PLACEHOLDER: your title, e.g. Data Scientist",
+      "location": "PLACEHOLDER: city, region",
+      "bio": "PLACEHOLDER: two or three sentences about who you are, what you work on, and what you are looking for.",
+      "email": "PLACEHOLDER@example.com",
+      "github": "https://github.com/kshitijabanala",
+      "linkedin": "PLACEHOLDER: https://www.linkedin.com/in/your-handle",
+      "resume": "",
+      "_note": "Every PLACEHOLDER value above is an inference or a blank for you to fill in. The name comes from the repo owner and git author."
+    }
+  },
+  "projects": [
+    {
+      "slug": "diabetic-readmission",
+      "title": "Diabetic Patient Readmission Prediction",
+      "shortTitle": "Readmission Risk",
+      "pitch": "Predicting 30-day hospital readmission for diabetic patients across 130 US hospitals, optimising for recall rather than accuracy.",
+      "domain": "Healthcare",
+      "tags": [
+        "classification",
+        "imbalanced-data",
+        "feature-importance",
+        "capstone"
+      ],
+      "tools": [
+        "Python",
+        "scikit-learn",
+        "Random Forest",
+        "XGBoost",
+        "SMOTE",
+        "pandas",
+        "seaborn"
+      ],
+      "languages": [
+        "Python"
+      ],
+      "year": 2025,
+      "featured": true,
+      "folder": "Capstone",
+      "readme": "Capstone/README.md",
+      "data": {
+        "name": "Diabetes 130-US Hospitals (1999 to 2008)",
+        "source": "UC Irvine Machine Learning Repository",
+        "url": "https://doi.org/10.24432/C5230J",
+        "records": "101,766 encounters, 47 features",
+        "files": [
+          "Capstone/Patient Readmission/diabetic_data.csv",
+          "Capstone/Patient Readmission/IDS_mapping.csv"
+        ]
+      },
+      "story": {
+        "question": "Which diabetic inpatients are most likely to be back within 30 days, and which clinical signals carry that risk?",
+        "method": "Dropped ID columns and features with more than 95% missing values, encoded categoricals and standardised numerics, then compared Logistic Regression, KNN, SVM, Random Forest and XGBoost on a 70/30 split with 5-fold cross-validation. SMOTE was tested and rejected because it overfit, so final models trained on the natural 11% positive rate.",
+        "finding": "Random Forest gave the best recall and F1 balance (recall 0.56) without overfitting. Lab procedure count, the three diagnosis codes, medication count and length of stay were the strongest predictors. Clinical variables beat demographics throughout."
+      },
+      "metrics": [
+        {
+          "label": "Encounters",
+          "value": "101,766"
+        },
+        {
+          "label": "Readmitted < 30d",
+          "value": "11%"
+        },
+        {
+          "label": "Best recall",
+          "value": "0.56",
+          "note": "Random Forest"
+        },
+        {
+          "label": "Models compared",
+          "value": "5"
+        }
+      ],
+      "results": [
+        {
+          "model": "Logistic Regression",
+          "accuracy": 0.42,
+          "recall": null,
+          "f1": 0.25
+        },
+        {
+          "model": "SVM",
+          "accuracy": 0.57,
+          "recall": null,
+          "f1": 0.51
+        },
+        {
+          "model": "XGBoost + SMOTE",
+          "accuracy": 0.59,
+          "recall": 0.4,
+          "f1": 0.42
+        },
+        {
+          "model": "Random Forest",
+          "accuracy": 0.56,
+          "recall": 0.56,
+          "f1": 0.44
+        }
+      ],
+      "signature": {
+        "generator": "readmissionByInpatient",
+        "title": "Readmission within 30 days by prior inpatient visits",
+        "description": "Share of encounters readmitted within 30 days, by the number of inpatient visits in the preceding year, computed from diabetic_data.csv. The baseline rate across all encounters is drawn as a reference line."
+      },
+      "visuals": [
+        {
+          "id": "1c788bd4-63d3-4c98-9da0-6db3544eb136",
+          "role": "hero",
+          "alt": "Horizontal bar chart titled Top Features for Predicting Readmission Within 30 Days. Number of lab procedures, diagnosis codes 2, 1 and 3, and number of medications lead, each near 0.1 importance; number of outpatient visits trails at about 0.02.",
+          "caption": "Random Forest feature importance for 30-day readmission."
+        },
+        {
+          "id": "7ea56a03-647b-4906-a49b-f9480fb6971c",
+          "role": "figure",
+          "alt": "Correlation matrix heatmap of the diabetes dataset. Strongest off-diagonal relationships are admission type with admission source (0.48) and time in hospital with number of medications (0.48).",
+          "caption": "Correlation matrix of numeric features before modelling."
+        }
+      ],
+      "links": [
+        {
+          "label": "Baseline project by L. Burrill",
+          "url": "https://github.com/lelandburrill/diabetes"
+        },
+        {
+          "label": "Strack et al. 2014, HbA1c and readmissions",
+          "url": "https://doi.org/10.1155/2014/781670"
+        }
+      ],
+      "inferred": [
+        "seaborn and pandas are inferred from the correlation heatmap style; no notebook is committed, only the data and README.",
+        "Year taken from the July 2025 commit dates and screenshot filenames."
+      ]
+    },
+    {
+      "slug": "diabetes-risk-dashboard",
+      "title": "Diabetes Risk and Management Dashboard",
+      "shortTitle": "Diabetes Dashboard",
+      "pitch": "A Power BI dashboard over 1,879 patient records asking which modifiable factors drive diabetes diagnosis and day-to-day management.",
+      "domain": "Public Health",
+      "tags": [
+        "dashboard",
+        "feature-engineering",
+        "exploratory-analysis",
+        "power-bi"
+      ],
+      "tools": [
+        "Power BI",
+        "DAX",
+        "Feature engineering"
+      ],
+      "languages": [
+        "DAX"
+      ],
+      "year": 2025,
+      "featured": false,
+      "folder": "Diabetes Analysis Project",
+      "readme": "Diabetes Analysis Project/README.md",
+      "data": {
+        "name": "Diabetes health dataset",
+        "source": "Kaggle (inferred from column schema and the Confidential DoctorInCharge field)",
+        "url": "https://www.kaggle.com/datasets/rabieelkharoua/diabetes-health-dataset-analysis",
+        "records": "1,879 patients, 46 variables",
+        "files": [
+          "Diabetes Analysis Project/Diabetes Data/diabetes_data.csv",
+          "Diabetes Analysis Project/PowerBi Dashboard/healthcareproject.pbit"
+        ]
+      },
+      "story": {
+        "question": "Of quality of life, diet quality, blood pressure, cholesterol risk, socioeconomic status and medication adherence, which matter most for developing and managing diabetes?",
+        "method": "Recoded every binary flag into labelled categories, then built derived features: age bands, BMI risk level, blood pressure category, blood sugar category, renal function and cholesterol risk. Six dashboard panels slice the diagnosis outcome by each candidate factor with education and risk-level filters.",
+        "finding": "Diet quality and medication adherence are the most direct, modifiable levers. Poor quality of life carried the highest diagnosis count (789), and middle and low socioeconomic groups accounted for over 70% of diagnoses. Blood pressure on its own did not separate diabetics from non-diabetics."
+      },
+      "metrics": [
+        {
+          "label": "Patients",
+          "value": "1,879"
+        },
+        {
+          "label": "Variables",
+          "value": "46"
+        },
+        {
+          "label": "Dashboard panels",
+          "value": "6"
+        },
+        {
+          "label": "Poor QoL diagnoses",
+          "value": "789"
+        }
+      ],
+      "signature": {
+        "generator": "diabetesByDiet",
+        "title": "Diagnosis rate by diet quality and BMI class",
+        "description": "Share of patients diagnosed with diabetes in each diet-quality and BMI cell, computed from diabetes_data.csv."
+      },
+      "visuals": [
+        {
+          "id": "decc89c8-d1de-4c6c-a39e-33a8d74e5745",
+          "role": "hero",
+          "alt": "Power BI dashboard titled Diabetes Risk/Management Insights with six panels: diagnoses by quality of life (poor 789, moderate 565, good 525), a diet-quality donut, diagnosis by blood pressure category, cholesterol risk against blood sugar, a socioeconomic status pie, and medication adherence by blood sugar category.",
+          "caption": "The six-panel Power BI dashboard."
+        }
+      ],
+      "links": [],
+      "inferred": [
+        "The README does not name the data source. Column names and ID ranges match the Kaggle diabetes health dataset by Rabie El Kharoua, which is synthetic; treat findings as illustrative.",
+        "DAX is inferred as the language because derived categories were built inside Power BI.",
+        "Year taken from the January 2025 screenshot filename."
+      ]
+    },
+    {
+      "slug": "nj-load-forecasting",
+      "title": "New Jersey Load Prediction",
+      "shortTitle": "NJ Load Forecast",
+      "pitch": "Forecasting hourly electricity demand for New Jersey's four utilities from weather and calendar features with LightGBM.",
+      "domain": "Energy",
+      "tags": [
+        "forecasting",
+        "time-series",
+        "gradient-boosting",
+        "weather"
+      ],
+      "tools": [
+        "Python",
+        "LightGBM",
+        "XGBoost",
+        "scikit-learn",
+        "pandas",
+        "seaborn",
+        "R",
+        "Jupyter"
+      ],
+      "languages": [
+        "Python",
+        "R"
+      ],
+      "year": 2024,
+      "featured": true,
+      "folder": "New Jersey Load Prediction Project",
+      "readme": "New Jersey Load Prediction Project/README.md",
+      "data": {
+        "name": "Utility hourly load, hourly weather, EIA generation and BEA economic series",
+        "source": "PJM / utility CIEP and RSCP eligible hourly load files (August 2024 update), hourly weather for Newark and Vineland 2019 to 2024, EIA net generation, BEA and BLS economic indicators",
+        "url": "https://www.pjm.com/markets-and-operations/energy/real-time/loadhryr",
+        "records": "4 utilities x 2 rate classes, hourly 2019 to 2024",
+        "files": [
+          "New Jersey Load Prediction Project/Cleaned utility Code/JCPL.zip",
+          "New Jersey Load Prediction Project/Cleaned utility Code/PSEG.zip",
+          "New Jersey Load Prediction Project/Cleaned utility Code/Project-ACE-complete.zip",
+          "New Jersey Load Prediction Project/Cleaned utility Code/Project-RECO-complete.zip"
+        ]
+      },
+      "story": {
+        "question": "Can weather and calendar data alone forecast hourly load for JCP&L, PSE&G, Atlantic City Electric and Rockland Electric, and which inputs matter most?",
+        "method": "Cleaned hourly weather in R (imputation, interpolation, outlier review), joined it to utility load by rate class and a hand-built date category table, then trained LightGBM regressors per utility and class after trialling linear regression and neural networks. Economic and renewable generation series were profiled for later inclusion.",
+        "finding": "Atmospheric pressure, temperature and humidity dominate feature importance in every model; among calendar features weekday beats season. Load peaks between 2 pm and 4 pm and in June through September. Held-out scores lag training scores, so hyperparameter tuning and cross-validation are the stated next steps."
+      },
+      "metrics": [
+        {
+          "label": "Utilities",
+          "value": "4"
+        },
+        {
+          "label": "Rate classes",
+          "value": "2",
+          "note": "RSCP and CIEP"
+        },
+        {
+          "label": "Weather years",
+          "value": "6"
+        },
+        {
+          "label": "Top feature",
+          "value": "Pressure"
+        }
+      ],
+      "signature": {
+        "generator": "newarkTempHeatmap",
+        "title": "Newark hourly temperature, 2023",
+        "description": "Mean temperature by month and hour of day for Newark in 2023, computed from the hourly weather CSV inside the JCPL archive. The same diurnal and seasonal shape drives the load models."
+      },
+      "visuals": [
+        {
+          "id": "02e0c199-11e8-4977-b03c-881a13cfde31",
+          "role": "hero",
+          "crop": {
+            "left": 0.08,
+            "top": 0.33,
+            "width": 0.42,
+            "height": 0.21
+          },
+          "alt": "LightGBM feature importance bar chart for the RECO utility CIEP rate class. Pressure leads at 296,176 splits, followed by temperature 261,328, humidity 254,678, dew point 230,560, wind speed 162,400 and weekday 25,881.",
+          "caption": "Feature importance for the Rockland Electric CIEP model, cropped from the project report."
+        },
+        {
+          "id": "96c6c506-091b-4cd6-a1d9-d1fef64997b2",
+          "role": "figure",
+          "crop": {
+            "left": 0.07,
+            "top": 0.665,
+            "width": 0.41,
+            "height": 0.225
+          },
+          "alt": "Box plot of PSE&G RSCP megawatts by hour of day. Medians rise from about 2,800 MW overnight to about 4,000 MW at 3 pm and 4 pm, with outliers above 7,000 MW in the afternoon.",
+          "caption": "Hourly load profile for PSE&G residential customers."
+        },
+        {
+          "id": "96c6c506-091b-4cd6-a1d9-d1fef64997b2",
+          "role": "figure",
+          "crop": {
+            "left": 0.52,
+            "top": 0.16,
+            "width": 0.42,
+            "height": 0.235
+          },
+          "alt": "Box plot of PSE&G RSCP megawatts by month. July and August have the highest medians near 4,500 MW; April the lowest near 2,700 MW.",
+          "caption": "Monthly load profile for PSE&G residential customers."
+        },
+        {
+          "id": "782a2051-47c6-4885-ab79-c32e6d924d80",
+          "role": "figure",
+          "crop": {
+            "left": 0.5,
+            "top": 0.07,
+            "width": 0.46,
+            "height": 0.21
+          },
+          "alt": "Bar chart of average monthly net generation for small-scale photovoltaic energy in New Jersey in 2024, peaking near 240 thousand megawatt-hours in May through July.",
+          "caption": "Small-scale solar generation by month, from the EIA series profiled for the project."
+        }
+      ],
+      "embeds": [
+        {
+          "title": "Atlantic City Electric notebook render",
+          "file": "New Jersey Load Prediction Project/Cleaned utility Code/Project-ACE-complete.zip",
+          "member": "Project-ACE-complete.html",
+          "kind": "notebook"
+        },
+        {
+          "title": "Rockland Electric notebook render",
+          "file": "New Jersey Load Prediction Project/Cleaned utility Code/Project-RECO-complete.zip",
+          "member": "Project-RECO-complete.html",
+          "kind": "notebook"
+        }
+      ],
+      "links": [
+        {
+          "label": "Energy Consumption Forecasts by Gradient Boosting Regression Trees",
+          "url": "https://doi.org/10.3390/math11051068"
+        }
+      ],
+      "inferred": [
+        "Data source URLs for PJM, EIA and BEA are inferred from the file names and README descriptions; the README does not link them.",
+        "The notebooks in the archives import lightgbm, xgboost, sklearn, pandas, seaborn and matplotlib; R is named in the README for weather cleaning but no R script is committed.",
+        "The file named Final code in the repo is empty (1 byte).",
+        "Held-out model scores are taken from the notebook screenshots in the README, which the README text does not discuss."
+      ]
+    },
+    {
+      "slug": "medicare-payments-2017",
+      "title": "Medicare 2017 Payment Analysis",
+      "shortTitle": "Medicare Payments",
+      "pitch": "What drives the gap between what Medicare pays and what hospitals collect? A Power BI exploration of 2017 inpatient charge data by region, DRG and provider.",
+      "domain": "Health Economics",
+      "tags": [
+        "dashboard",
+        "geospatial",
+        "key-influencers",
+        "power-bi"
+      ],
+      "tools": [
+        "Power BI",
+        "Key Influencers",
+        "Map visual",
+        "Regression"
+      ],
+      "languages": [
+        "DAX"
+      ],
+      "year": 2024,
+      "featured": true,
+      "folder": "Patient Outcomes Project",
+      "readme": "Patient Outcomes Project/README.md",
+      "data": {
+        "name": "Medicare Inpatient Hospitals by Provider and Service, 2017",
+        "source": "Centers for Medicare and Medicaid Services (CMS)",
+        "url": "https://data.cms.gov/provider-summary-by-type-of-service/medicare-inpatient-hospitals/medicare-inpatient-hospitals-by-provider-and-service",
+        "records": "Provider by DRG rows for 2017, with discharges, covered charges, total and Medicare payments",
+        "files": [
+          "Patient Outcomes Project/Project Data/Medicare Inpatient 2017.xlsx",
+          "Patient Outcomes Project/PowerBi dashboard/Healthcare_Finance_Project.pbit"
+        ]
+      },
+      "story": {
+        "question": "How do hospital referral region, DRG definition and provider state shape average total Medicare payments?",
+        "method": "Cleaned the CMS charge file, then built a dashboard with a Key Influencers visual, a state choropleth, provider and referral-region rankings and dynamic filters. Regression and correlation checks backed the visual findings.",
+        "finding": "DRG is the largest lever: heart transplant and heart assist implant cases raise average total payments by roughly $253.5K. Average Medicare payment sits near $11.8K against $13.98K average total payment, and specialised providers such as US Pain and Spine Hospital in Houston top the provider ranking at $72K. Chicago generates the most referrals, Washington the fewest."
+      },
+      "metrics": [
+        {
+          "label": "Avg covered charges",
+          "value": "$61.2K"
+        },
+        {
+          "label": "Avg Medicare payment",
+          "value": "$11.8K"
+        },
+        {
+          "label": "Avg total payment",
+          "value": "$14.0K"
+        },
+        {
+          "label": "Heart transplant uplift",
+          "value": "+$253.5K"
+        }
+      ],
+      "signature": {
+        "generator": "medicareByState",
+        "title": "Average total payment by provider state",
+        "description": "Discharge-weighted average total payment per state, computed from Medicare Inpatient 2017.xlsx. Top fifteen states shown."
+      },
+      "visuals": [
+        {
+          "id": "e960589f-a652-4a53-99c6-752b5277c371",
+          "role": "hero",
+          "alt": "Power BI dashboard titled Medicare 2017 Charges. Panels show average total payments by provider name led by US Pain and Spine Hospital at 72K, a gauge of 13.98K average total payments, hospital referrals by city led by Chicago with 26, three KPI cards (61.17K covered charges, 11.82K Medicare payments, 13.98K total payments), a US state map, and a Key Influencers panel.",
+          "caption": "The Medicare 2017 Charges dashboard."
+        }
+      ],
+      "links": [],
+      "inferred": [
+        "The README quotes $11,000 Medicare and $27,960 total payment; the dashboard cards read $11.82K and $13.98K. The site shows the dashboard values and flags the discrepancy here. The $27.96K figure appears to be the gauge maximum, which is twice the mean.",
+        "The CMS dataset URL is inferred from the file name and variable list.",
+        "Year taken from the December 2024 screenshot filename."
+      ]
+    },
+    {
+      "slug": "self-determination-theory",
+      "title": "Self-Determination Theory and Workplace Well-Being",
+      "shortTitle": "SDT at Work",
+      "pitch": "Do autonomy, relatedness and competence at work predict positive affect? A three-way ANOVA on 2,344 MIDUS participants.",
+      "domain": "Psychology",
+      "tags": [
+        "anova",
+        "experimental-design",
+        "survey-data",
+        "statistics"
+      ],
+      "tools": [
+        "R",
+        "ANOVA",
+        "ggplot2"
+      ],
+      "languages": [
+        "R"
+      ],
+      "year": 2025,
+      "featured": true,
+      "folder": "Self Determination Theory Project",
+      "readme": "Self Determination Theory Project/README.md",
+      "data": {
+        "name": "Midlife in the United States (MIDUS)",
+        "source": "MIDUS national longitudinal study, workplace and affect items",
+        "url": "https://midus.wisc.edu/",
+        "records": "2,344 participants, 3 factors at 3 levels, 1 outcome",
+        "files": [
+          "Self Determination Theory Project/Final SDT Code/categorizedFinal_cleaned_data.csv"
+        ]
+      },
+      "story": {
+        "question": "Does workplace autonomy (decision authority), relatedness (coworker support) and competence (persistence in goal striving) influence employees' positive affect, and do the three interact?",
+        "method": "Built composite scales for each construct, recoded them to low, medium and high, confirmed all 27 treatment cells were populated, and fitted a three-way ANOVA in R. Sex was dropped as a block after it interacted with a primary factor. The unusualness threshold was set at 0.12 given the exploratory aim.",
+        "finding": "Competence (F = 14.79, p < 0.0001) and relatedness (F = 11.94, p < 0.0001) each raise positive affect; autonomy is weaker (p = 0.1036, partial eta squared 0.002). No two-way or three-way interactions were significant, so the three needs act independently."
+      },
+      "metrics": [
+        {
+          "label": "Participants",
+          "value": "2,344"
+        },
+        {
+          "label": "Treatment cells",
+          "value": "27"
+        },
+        {
+          "label": "Competence F",
+          "value": "14.79"
+        },
+        {
+          "label": "Interactions significant",
+          "value": "0"
+        }
+      ],
+      "signature": {
+        "generator": "sdtAffect",
+        "title": "Positive affect by level of each need",
+        "description": "Mean positive affect with interquartile range at low, medium and high levels of autonomy, relatedness and competence, computed from the cleaned MIDUS extract."
+      },
+      "visuals": [
+        {
+          "id": "518401d2-0fc2-4ad1-88db-79fc4da6b3e7",
+          "role": "hero",
+          "crop": {
+            "left": 0.28,
+            "top": 0.1,
+            "width": 0.44,
+            "height": 0.21
+          },
+          "alt": "Histogram of positive affect by autonomy level. High-autonomy respondents cluster at positive affect 3.5 to 4, with counts above 400; low-autonomy respondents are few and spread across 2 to 4.",
+          "caption": "Positive affect distribution by autonomy level, from the project report."
+        },
+        {
+          "id": "738cc2a4-7684-4da7-902b-851d89327e93",
+          "role": "figure",
+          "crop": {
+            "left": 0.08,
+            "top": 0.1,
+            "width": 0.84,
+            "height": 0.17
+          },
+          "alt": "ANOVA omnibus table. Competence F 14.793 p < 0.0001; relatedness F 11.937 p < 0.0001; autonomy F 2.269 p 0.1036; all interaction terms p > 0.4; residual df 2,317.",
+          "caption": "ANOVA omnibus test."
+        }
+      ],
+      "links": [
+        {
+          "label": "Szulawski et al. 2021, Is self-determination good for your effectiveness?",
+          "url": "https://doi.org/10.1371/journal.pone.0256558"
+        }
+      ],
+      "inferred": [
+        "ggplot2 is inferred from the histogram styling; no R script is committed, only the cleaned CSV.",
+        "The README headline image is a generic SDT Venn diagram, not project output, so it is not used as the hero.",
+        "Year is inferred; the README has no date.",
+        "The cleaned CSV stores each need as a survey frequency label rather than the numeric composite. The signature chart maps Never and Rarely (or Not at all and A little) to low, Some of the time (or Some) to medium, and Most or All of the time (or A lot) to high."
+      ]
+    },
+    {
+      "slug": "study-abroad-integration",
+      "title": "Study Abroad Programs: PSU and OSU Integrated",
+      "shortTitle": "Study Abroad DB",
+      "pitch": "Scraping, cleaning and unifying two universities' study abroad catalogues into one queryable SQLite schema.",
+      "domain": "Education",
+      "tags": [
+        "web-scraping",
+        "data-integration",
+        "sql",
+        "schema-design"
+      ],
+      "tools": [
+        "Python",
+        "Beautiful Soup",
+        "pandas",
+        "SQLite",
+        "SQL"
+      ],
+      "languages": [
+        "Python",
+        "SQL"
+      ],
+      "year": 2024,
+      "featured": false,
+      "folder": "Study Abroad Programs Project",
+      "readme": "Study Abroad Programs Project/README.md",
+      "data": {
+        "name": "PSU and OSU study abroad program listings",
+        "source": "Public program tables on the Penn State and Ohio State education abroad websites, scraped",
+        "url": "https://global.psu.edu/",
+        "records": "277 distinct program rows (554 rows in the committed CSV)",
+        "files": [
+          "Study Abroad Programs Project/Cleaned Combined Code/PSU-OSU-COMBINED-FINAL.csv"
+        ]
+      },
+      "story": {
+        "question": "Can two universities' study abroad catalogues be merged into one schema that answers where programs run, who offers them and how the portfolios differ?",
+        "method": "Scraped program name, city, country and region with Beautiful Soup, normalised multi-city and multi-country entries, stripped formatting noise, added a College column, then loaded a mediated schema into SQLite and validated it with queries.",
+        "finding": "Europe dominates with more than half of all programs; Asia and Latin America follow at roughly a tenth each. OSU leans on the United Kingdom while PSU concentrates on Australia and Argentina, and London alone hosts six programs."
+      },
+      "metrics": [
+        {
+          "label": "Programs",
+          "value": "277",
+          "note": "distinct rows in the CSV"
+        },
+        {
+          "label": "Universities",
+          "value": "2"
+        },
+        {
+          "label": "Europe share",
+          "value": "54%"
+        },
+        {
+          "label": "Schema columns",
+          "value": "5"
+        }
+      ],
+      "signature": {
+        "generator": "programsByRegion",
+        "title": "Programs by region",
+        "description": "Distinct study abroad programs by region, computed from the combined CSV after removing duplicate rows."
+      },
+      "visuals": [
+        {
+          "id": "f3156d3e-683f-431c-899f-e8201a4862c5",
+          "role": "hero",
+          "alt": "SQL query and result grouping programs by region: Africa 30, Asia 64, Europe 300, Latin America 34, Middle East 14, North America 2.",
+          "caption": "Program counts by region from the SQLite database."
+        },
+        {
+          "id": "4ce77d3b-9d6b-4f06-ae23-4395c577fc55",
+          "role": "figure",
+          "alt": "Table preview of the mediated schema with columns Program Name, City, Country, Region and College.",
+          "caption": "The mediated schema."
+        },
+        {
+          "id": "c1526041-5168-4a88-beea-6bb09ec4014e",
+          "role": "figure",
+          "alt": "Query result listing programs in Japan across Tokyo, Mito, Sendai and multi-city entries.",
+          "caption": "Programs offered in Japan."
+        }
+      ],
+      "links": [],
+      "inferred": [
+        "The scraper and SQL scripts are not committed; only the final combined CSV is.",
+        "Every program in the committed CSV appears twice, once under each university (554 rows = 277 x 2), so the per-university split described in the README cannot be reproduced from the file. The signature chart de-duplicates and shows regions only; the README's 300 Europe programs corresponds to 150 distinct rows.",
+        "Year is inferred from neighbouring project dates."
+      ]
+    }
+  ]
+}

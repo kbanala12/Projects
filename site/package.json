@@ -1,0 +1,31 @@
+{
+  "name": "projects-showcase",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Showcase site for the data science projects in this repository",
+  "scripts": {
+    "discover": "node scripts/discover.mjs",
+    "media": "node scripts/media.mjs",
+    "charts": "node scripts/charts.mjs",
+    "pages": "node scripts/pages.mjs",
+    "generate": "npm run discover && npm run media && npm run charts && npm run pages",
+    "dev": "npm run pages && vite",
+    "build": "npm run pages && vite build",
+    "preview": "vite preview",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "devDependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "d3": "^7.9.0",
+    "d3-dsv": "^3.0.1",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.64.0",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.4",
+    "xlsx": "^0.18.5"
+  }
+}
